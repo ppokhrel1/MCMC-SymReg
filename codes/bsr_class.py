@@ -157,7 +157,7 @@ class BSR(BaseEstimator,RegressorMixin):
             epsilon = np.eye(XX.shape[1])*1e-6  # add to the matrix to prevent singular matrrix
             yy = np.array(train_y)
             yy.shape = (yy.shape[0], 1)
-            Beta = np.linalg.inv(np.matmul(XX.transpose(), XX)+epsilon)
+            Beta = np.linalg.pinv(np.matmul(XX.transpose(), XX)+epsilon)
             Beta = np.matmul(Beta, np.matmul(XX.transpose(), yy))
             output = np.matmul(XX, Beta)
             Beta = Beta / scale  # rescale the beta, above we scale XX for calculation by fwl
